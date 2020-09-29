@@ -34,7 +34,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx.h"
-#include "./lcd/bsp_ili9806g_lcd.h"
+#include "./lcd/bsp_nt35510_lcd.h"
 #include "./systick/bsp_SysTick.h"
 
 #define Delay(ms)  Delay_ms(ms)
@@ -42,7 +42,7 @@
 
 /* Exported constants --------------------------------------------------------*/
 #define DCMI_DR_ADDRESS       (uint32_t)&DCMI->DR
-#define FSMC_LCD_ADDRESS      FSMC_Addr_ILI9806G_DATA
+#define FSMC_LCD_ADDRESS      FSMC_Addr_NT35510_DATA
 
 
 

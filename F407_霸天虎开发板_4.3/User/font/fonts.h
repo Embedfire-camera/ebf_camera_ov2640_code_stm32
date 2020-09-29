@@ -28,4 +28,8 @@ extern sFONT Font8x16;
 #define      GetGBKCode( ucBuffer, usChar ) 
 
 
+/*******************中文********** 在显示屏上显示的字符大小 ***************************/
+#define      WIDTH_CH_CHAR		                32	    //中文字符宽度 
+#define      HEIGHT_CH_CHAR		              	32		  //中文字符高度 
+
 #endif /*end of __FONT_H    */

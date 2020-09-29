@@ -17,7 +17,7 @@
   
 #include "stm32f4xx.h"
 #include "./usart/bsp_debug_usart.h"
-#include "./lcd/bsp_ili9806g_lcd.h"
+#include "./lcd/bsp_nt35510_lcd.h"
 #include "./camera/bsp_ov2640.h"
 #include "./systick/bsp_SysTick.h"
 
@@ -42,15 +42,15 @@ extern uint16_t img_width, img_height;
 void ImagDisp(void)
 {
 		//扫描模式，横屏
-    ILI9806G_GramScan(5);
+    NT35510_GramScan(5);
     LCD_SetFont(&Font16x32);
 		LCD_SetColors(RED,BLACK);
 	
-    ILI9806G_Clear(0,0,LCD_X_LENGTH,LCD_Y_LENGTH);	/* 清屏，显示全黑 */
-    ILI9806G_DispStringLine_EN(LINE(0),"BH 4.8 inch LCD + OV2640");
+    NT35510_Clear(0,0,LCD_X_LENGTH,LCD_Y_LENGTH);	/* 清屏，显示全黑 */
+    NT35510_DispStringLine_EN(LINE(0),"BH 4.8 inch LCD + OV2640");
 	
 		/*DMA会把数据传输到液晶屏，开窗后数据按窗口排列 */
-    ILI9806G_OpenWindow(0,0,img_width,img_height);	
+    NT35510_OpenWindow(0,0,img_width,img_height);	
 		
 		OV2640_Capture_Control(ENABLE);
 }
@@ -64,16 +64,16 @@ int main(void)
 {	
 	/*图像大小，修改这两个值即可改变图像的大小*/
 	//要求为4的倍数
-	img_width=852;
+	img_width=800;
 	img_height =480;
 
 	
-	ILI9806G_Init ();         //LCD 初始化
+	NT35510_Init ();         //LCD 初始化
 	
 	LCD_SetFont(&Font16x32);
 	LCD_SetColors(RED,BLACK);
 
-  ILI9806G_Clear(0,0,LCD_X_LENGTH,LCD_Y_LENGTH);	/* 清屏，显示全黑 */
+  NT35510_Clear(0,0,LCD_X_LENGTH,LCD_Y_LENGTH);	/* 清屏，显示全黑 */
 
   Debug_USART_Config();   
 	
@@ -83,7 +83,7 @@ int main(void)
 	SysTick_Init();
 
 	//液晶扫描方向
-	ILI9806G_GramScan(5);
+	NT35510_GramScan(5);
 	
   CAMERA_DEBUG("STM32F407 DCMI 驱动OV2640例程");
 
@@ -96,14 +96,14 @@ int main(void)
   if(OV2640_Camera_ID.PIDH  == 0x26)
   {
     sprintf(dispBuf, "OV2640 camera,ID:0x%x", OV2640_Camera_ID.PIDH);
-		ILI9806G_DispStringLine_EN(LINE(0),dispBuf);
+		NT35510_DispStringLine_EN(LINE(0),dispBuf);
     CAMERA_DEBUG("检测到摄像头 %x %x",OV2640_Camera_ID.Manufacturer_ID1 ,OV2640_Camera_ID.Manufacturer_ID2);
 
   }
   else
   {
     LCD_SetTextColor(RED);
-    ILI9806G_DispString_EN(10,10,"Can not detect OV2640 module,please check the connection!");
+    NT35510_DispString_EN(10,10,"Can not detect OV2640 module,please check the connection!");
     CAMERA_DEBUG("没有检测到OV2640摄像头，请重新检查连接。");
 
     while(1);  

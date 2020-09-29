@@ -47,16 +47,16 @@ OV2640 最高支持200W像素，支持jpeg格式直接输出。
 
 液晶屏：
 液晶屏接口与STM32的FSMC接口相连，支565格式，
-使用FSMC产生8080时序与液晶屏驱动芯片ILI9806G通讯.
+使用FSMC产生8080时序与液晶屏驱动芯片NT35510通讯.
 
 
 		/*液晶控制信号线*/
-		ILI9806G_CS 	<--->	PG10      	//片选，选择NOR/SRAM块 BANK1_NOR/SRAM3
-		ILI9806G_DC  	<---> 	PF0			//PF0为FSMC_A0,本引脚决定了访问LCD时使用的地址
-		ILI9806G_WR 	<---> 	PD5			//写使能
-		ILI9806G_RD  	<---> 	PD4			//读使能
-		ILI9806G_RST	<---> 	PF11		//复位引脚
-		ILI9806G_BK 	<---> 	PF9 		//背光引脚，高电平亮
+		NT35510_CS 	<--->	PG10      	//片选，选择NOR/SRAM块 BANK1_NOR/SRAM3
+		NT35510_DC  	<---> 	PF0			//PF0为FSMC_A0,本引脚决定了访问LCD时使用的地址
+		NT35510_WR 	<---> 	PD5			//写使能
+		NT35510_RD  	<---> 	PD4			//读使能
+		NT35510_RST	<---> 	PF11		//复位引脚
+		NT35510_BK 	<---> 	PF9 		//背光引脚，高电平亮
 
 
 串口(TTL-USB TO USART)：
